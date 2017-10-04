@@ -15,6 +15,10 @@ namespace xamTest
             SetContentView(Resource.Layout.Main);
 
             Button button = FindViewById<Button>(Resource.Id.lifeCounterMenuButton);
+            button.Click += delegate
+            {
+                StartActivity(typeof(LifeCounter));
+            };
 
 
 

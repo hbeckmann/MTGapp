@@ -10,8 +10,7 @@
         android:layout_height="145.5dp"
         android:id="@+id/linearLayout1"
         android:elevation="10dp"
-        android:background="#00695C"
-        >
+        android:background="#00695C">
         <Space
             android:layout_width="match_parent"
             android:layout_height="37.5dp"
@@ -51,6 +50,6 @@
             android:text="♥ Life Counter"
             android:textSize="25dp"
             android:background="#1DE9B6"
-            android:foreground="?android:attr/selectableItemBackground"/>
+            android:foreground="?android:attr/selectableItemBackground" />
     </LinearLayout>
 </LinearLayout>
