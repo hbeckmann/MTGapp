@@ -53,6 +53,9 @@ namespace xamTest
 			// aapt resource value: 0x7f040001
 			public const int linearLayout1 = 2130968577;
 			
+			// aapt resource value: 0x7f040005
+			public const int menuViewPager = 2130968581;
+			
 			// aapt resource value: 0x7f040002
 			public const int space2 = 2130968578;
 			
@@ -77,6 +80,9 @@ namespace xamTest
 			
 			// aapt resource value: 0x7f020001
 			public const int Main = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int Menu = 2130837506;
 			
 			static Layout()
 			{

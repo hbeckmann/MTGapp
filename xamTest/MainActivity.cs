@@ -4,7 +4,7 @@ using Android.OS;
 
 namespace xamTest
 {
-    [Activity(Label = "xamTest", MainLauncher = true)]
+    [Activity(Label = "xamTest")]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
