@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="25px"
@@ -29,8 +29,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/topLifeCounter"
-                android:textSize="50dp"
-                android:rotation="180" />
+                android:textSize="90dp"
+                android:rotation="180"
+                android:textColor="@android:color/background_light" />
         </RelativeLayout>
         <RelativeLayout
             android:minWidth="25px"
@@ -75,6 +76,49 @@
                 android:elevation="10dp"
                 android:clickable="true"
                 android:layout_gravity="center_horizontal" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="214.0dp"
+        android:id="@+id/relativeLayout4">
+        <RelativeLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="139.0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/relativeLayout5"
+            android:layout_centerHorizontal="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/gameTimer"
+                android:rotation="90"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="50dp"
+                android:textColor="@android:color/background_light"
+                android:text="00:00" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:id="@+id/lifeCounterIcons"
+            android:layout_alignParentEnd="true">
+            <ImageButton
+                android:src="@drawable/icrefreshblack24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/refreshTimer"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:background="#439889"
+                android:scaleX="0.75"
+                android:scaleY="0.75" />
         </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>
