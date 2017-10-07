@@ -15,6 +15,28 @@ namespace xamTest
             return view;
 
         }
+
+        public override void OnStart()
+        {
+            base.OnStart();
+            Button decreaseButton = View.FindViewById<Button>(Resource.Id.topDecreaseButton);
+            Button increaseButton = View.FindViewById<Button>(Resource.Id.topIncreaseButton);
+            TextView topLifeCounter = View.FindViewById<TextView>(Resource.Id.topLifeCounter);
+            decreaseButton.Click += delegate
+            {
+                if (int.Parse(topLifeCounter.Text) > 0)
+                {
+                    topLifeCounter.Text = (int.Parse(topLifeCounter.Text) - 1).ToString();
+                }
+            };
+
+            increaseButton.Click += delegate
+            {
+                topLifeCounter.Text = (int.Parse(topLifeCounter.Text) + 1).ToString();
+            };
+
+        }
+
     }
 }
 
