@@ -11,6 +11,9 @@ namespace xamTest
     [Activity(Label = "LifeCounter")]
     public class LifeCounterFragment : Android.Support.V4.App.Fragment
     {
+
+        Chronometer gameTimer;
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
 
@@ -24,9 +27,9 @@ namespace xamTest
             base.OnStart();
             Button decreaseButton = View.FindViewById<Button>(Resource.Id.topDecreaseButton);
             Button increaseButton = View.FindViewById<Button>(Resource.Id.topIncreaseButton);
-            ImageButton resetTimerButton = View.FindViewById<ImageButton>(Resource.Id.refreshTimerButton);
+            Button resetTimerButton = View.FindViewById<Button>(Resource.Id.refreshTimerButton);
             TextView topLifeCounter = View.FindViewById<TextView>(Resource.Id.topLifeCounter);
-            Chronometer gameTimer = View.FindViewById<Chronometer>(Resource.Id.gameTimer);
+            gameTimer = View.FindViewById<Chronometer>(Resource.Id.gameTimer);
             gameTimer.Base = SystemClock.ElapsedRealtime();
             gameTimer.Start();
 
@@ -51,6 +54,18 @@ namespace xamTest
             };
 
         }
+
+        //public override void OnPause()
+        //{
+        //    base.OnPause();
+        //    gameTimer.Stop();
+        //}
+
+        //public override void OnResume()
+        //{
+        //    base.OnResume();
+        //    gameTimer.Start();
+        //}
 
 
     }
