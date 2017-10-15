@@ -82,7 +82,7 @@ namespace xamTest
 			public const int menuViewPager = 2131034127;
 			
 			// aapt resource value: 0x7f050009
-			public const int refreshTimer = 2131034121;
+			public const int refreshTimerButton = 2131034121;
 			
 			// aapt resource value: 0x7f050001
 			public const int relativeLayout2 = 2131034113;

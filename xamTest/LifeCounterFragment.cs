@@ -11,10 +11,6 @@ namespace xamTest
     [Activity(Label = "LifeCounter")]
     public class LifeCounterFragment : Android.Support.V4.App.Fragment
     {
-
-        TextView gameTimer;
-        Stopwatch sw;
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
 
@@ -28,6 +24,7 @@ namespace xamTest
             base.OnStart();
             Button decreaseButton = View.FindViewById<Button>(Resource.Id.topDecreaseButton);
             Button increaseButton = View.FindViewById<Button>(Resource.Id.topIncreaseButton);
+            ImageButton resetTimerButton = View.FindViewById<ImageButton>(Resource.Id.refreshTimerButton);
             TextView topLifeCounter = View.FindViewById<TextView>(Resource.Id.topLifeCounter);
             Chronometer gameTimer = View.FindViewById<Chronometer>(Resource.Id.gameTimer);
             gameTimer.Base = SystemClock.ElapsedRealtime();
@@ -44,6 +41,13 @@ namespace xamTest
             increaseButton.Click += delegate
             {
                 topLifeCounter.Text = (int.Parse(topLifeCounter.Text) + 1).ToString();
+            };
+
+            resetTimerButton.Click += delegate
+            {
+                gameTimer.Stop();
+                gameTimer.Base = SystemClock.ElapsedRealtime();
+                gameTimer.Start();
             };
 
         }
