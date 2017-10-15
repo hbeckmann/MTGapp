@@ -83,7 +83,9 @@
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="214.0dp"
-        android:id="@+id/relativeLayout4">
+        android:id="@+id/relativeLayout4"
+        android:background="#5ddef4"
+        android:elevation="10dp">
         <RelativeLayout
             android:minWidth="25px"
             android:minHeight="25px"
@@ -91,7 +93,7 @@
             android:layout_height="match_parent"
             android:id="@+id/relativeLayout5"
             android:layout_centerHorizontal="true">
-            <TextView
+            <Chronometer
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/gameTimer"
@@ -116,7 +118,7 @@
                 android:id="@+id/refreshTimer"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:background="#439889"
+                android:background="#5ddef4"
                 android:scaleX="0.75"
                 android:scaleY="0.75" />
         </RelativeLayout>

@@ -18,7 +18,6 @@ public class LifeCounter : Activity, GestureDetector.IOnGestureListener
     {
         if (velocityX > 5000)
         {
-            //StartActivity(typeof(MainActivity));
             Finish();
             return true;
         }
