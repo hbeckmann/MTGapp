@@ -5,6 +5,7 @@ using Android.Views;
 using System.Threading;
 using System;
 using System.Diagnostics;
+using Android.Content;
 
 namespace xamTest
 {
@@ -13,6 +14,8 @@ namespace xamTest
     {
 
         Chronometer gameTimer;
+        ISharedPreferences sharedPref;
+        ISharedPreferencesEditor editor;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -22,16 +25,19 @@ namespace xamTest
 
         }
 
-        public override void OnStart()
+        public override void OnActivityCreated(Bundle savedInstanceState)
         {
-            base.OnStart();
+            base.OnActivityCreated(savedInstanceState);
             Button decreaseButton = View.FindViewById<Button>(Resource.Id.topDecreaseButton);
             Button increaseButton = View.FindViewById<Button>(Resource.Id.topIncreaseButton);
             Button resetTimerButton = View.FindViewById<Button>(Resource.Id.refreshTimerButton);
             TextView topLifeCounter = View.FindViewById<TextView>(Resource.Id.topLifeCounter);
-            gameTimer = View.FindViewById<Chronometer>(Resource.Id.gameTimer);
-            gameTimer.Base = SystemClock.ElapsedRealtime();
-            gameTimer.Start();
+
+            Context context = this.Activity;
+            sharedPref = context.GetSharedPreferences(
+                GetString(Resource.String.preference_file), FileCreationMode.Private
+                );
+            editor = sharedPref.Edit();
 
             decreaseButton.Click += delegate
             {
@@ -55,17 +61,34 @@ namespace xamTest
 
         }
 
-        //public override void OnPause()
-        //{
-        //    base.OnPause();
-        //    gameTimer.Stop();
-        //}
+        public override void OnStart()
+        {
+            base.OnStart();
 
-        //public override void OnResume()
-        //{
-        //    base.OnResume();
-        //    gameTimer.Start();
-        //}
+            gameTimer = View.FindViewById<Chronometer>(Resource.Id.gameTimer);
+            gameTimer.Base = SystemClock.ElapsedRealtime();
+            gameTimer.Start();
+
+        }
+
+
+        public override void OnPause()
+        {
+            base.OnPause();
+            gameTimer.Stop();
+            editor.PutLong("pausedTime", SystemClock.ElapsedRealtime() - gameTimer.Base);
+            editor.Commit();
+            Console.WriteLine("Pausing. Attemption to log " + (SystemClock.ElapsedRealtime() - gameTimer.Base) + " time to the preferences");
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            long pausedGameTime = sharedPref.GetLong("pausedTime", 0);
+            Console.WriteLine("Unpausing with pref of " + pausedGameTime);
+            gameTimer.Base = SystemClock.ElapsedRealtime() - pausedGameTime;
+            gameTimer.Start();
+        }
 
 
     }

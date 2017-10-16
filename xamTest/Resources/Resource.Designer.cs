@@ -152,6 +152,9 @@ namespace xamTest
 			// aapt resource value: 0x7f040000
 			public const int app_name = 2130968576;
 			
+			// aapt resource value: 0x7f040001
+			public const int preference_file = 2130968577;
+			
 			static String()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
