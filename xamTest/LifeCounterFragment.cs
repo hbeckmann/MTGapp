@@ -16,11 +16,13 @@ namespace xamTest
         Chronometer gameTimer;
         ISharedPreferences sharedPref;
         ISharedPreferencesEditor editor;
+        Boolean resumeGame, appRestarted;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
 
             View view = inflater.Inflate(Resource.Layout.LifeCounter, container, false);
+            appRestarted = true;
             return view;
 
         }
@@ -61,13 +63,35 @@ namespace xamTest
 
         }
 
+        public override bool UserVisibleHint
+        {
+            get => base.UserVisibleHint;
+            set {
+                base.UserVisibleHint = value;
+                if (value) {
+                    if(resumeGame != true && !appRestarted)
+                    {
+                        gameTimer.Start();
+                        Console.WriteLine("Starting Clock from on visibuleHint");
+                    }
+
+                    if (appRestarted)
+                    {
+                        ResumeGameDialog(this.Context, ResumeTime, RestartTime);
+                    }
+                }
+                appRestarted = false;
+
+            }
+        }
+
         public override void OnStart()
         {
             base.OnStart();
-
             gameTimer = View.FindViewById<Chronometer>(Resource.Id.gameTimer);
             gameTimer.Base = SystemClock.ElapsedRealtime();
-            gameTimer.Start();
+
+            Console.WriteLine("LifeCounter fragment has hit OnStart");
 
         }
 
@@ -78,17 +102,60 @@ namespace xamTest
             gameTimer.Stop();
             editor.PutLong("pausedTime", SystemClock.ElapsedRealtime() - gameTimer.Base);
             editor.Commit();
-            Console.WriteLine("Pausing. Attemption to log " + (SystemClock.ElapsedRealtime() - gameTimer.Base) + " time to the preferences");
+            resumeGame = true;
+            appRestarted = false;
+            //Console.WriteLine("Pausing. Attemption to log " + (SystemClock.ElapsedRealtime() - gameTimer.Base) + " time to the preferences");
         }
 
         public override void OnResume()
         {
             base.OnResume();
+            if (resumeGame == true)
+            {
+                long pausedGameTime = sharedPref.GetLong("pausedTime", 0);
+                //Console.WriteLine("Unpausing with pref of " + pausedGameTime);
+                gameTimer.Base = SystemClock.ElapsedRealtime() - pausedGameTime;
+                gameTimer.Start();
+            } else if (UserVisibleHint && !appRestarted)
+            {
+                gameTimer.Base = SystemClock.ElapsedRealtime();
+                Console.WriteLine("Starting Clock from on Resume");
+                gameTimer.Start();
+            }
+
+            Console.WriteLine("LifeCounter fragment has hit OnResume");
+        }
+
+        public void ResumeGameDialog(Context context, AlertFunction positiveFunc, AlertFunction negativeFunc )
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.SetTitle("Do you want to resume your last game?");
+            builder.SetPositiveButton("Resume", (senderAlert, args) => { positiveFunc(); });
+            builder.SetNegativeButton("No thanks", (senderAlert, args) => { negativeFunc(); });
+            Dialog dialog = builder.Create();
+            dialog.Show();
+        }
+
+        public delegate void AlertFunction();
+
+        public void ResumeTime()
+        {
+            resumeGame = true;
             long pausedGameTime = sharedPref.GetLong("pausedTime", 0);
-            Console.WriteLine("Unpausing with pref of " + pausedGameTime);
             gameTimer.Base = SystemClock.ElapsedRealtime() - pausedGameTime;
             gameTimer.Start();
+            Console.WriteLine("Starting from ResumeTime dialog func");
         }
+
+        public void RestartTime()
+        {
+            resumeGame = false;
+            gameTimer.Base = SystemClock.ElapsedRealtime();
+            gameTimer.Start();
+            Console.WriteLine("Starting from restart time");
+        }
+
+
 
 
     }
