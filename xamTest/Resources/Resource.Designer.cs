@@ -66,23 +66,32 @@ namespace xamTest
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f05000e
+			public const int bottomDecreaseButton = 2131034126;
+			
+			// aapt resource value: 0x7f05000c
+			public const int bottomIncreaseButton = 2131034124;
+			
+			// aapt resource value: 0x7f05000d
+			public const int bottomLifeCounter = 2131034125;
+			
 			// aapt resource value: 0x7f050007
 			public const int gameTimer = 2131034119;
 			
 			// aapt resource value: 0x7f050008
 			public const int lifeCounterIcons = 2131034120;
 			
-			// aapt resource value: 0x7f05000d
-			public const int lifeCounterLayout = 2131034125;
+			// aapt resource value: 0x7f050012
+			public const int lifeCounterLayout = 2131034130;
 			
-			// aapt resource value: 0x7f05000e
-			public const int lifeCounterMenuButton = 2131034126;
-			
-			// aapt resource value: 0x7f05000a
-			public const int linearLayout1 = 2131034122;
+			// aapt resource value: 0x7f050013
+			public const int lifeCounterMenuButton = 2131034131;
 			
 			// aapt resource value: 0x7f05000f
-			public const int menuViewPager = 2131034127;
+			public const int linearLayout1 = 2131034127;
+			
+			// aapt resource value: 0x7f050014
+			public const int menuViewPager = 2131034132;
 			
 			// aapt resource value: 0x7f050009
 			public const int refreshTimerButton = 2131034121;
@@ -99,11 +108,17 @@ namespace xamTest
 			// aapt resource value: 0x7f050006
 			public const int relativeLayout5 = 2131034118;
 			
-			// aapt resource value: 0x7f05000b
-			public const int space2 = 2131034123;
+			// aapt resource value: 0x7f05000a
+			public const int relativeLayout6 = 2131034122;
 			
-			// aapt resource value: 0x7f05000c
-			public const int textView1 = 2131034124;
+			// aapt resource value: 0x7f05000b
+			public const int relativeLayout7 = 2131034123;
+			
+			// aapt resource value: 0x7f050010
+			public const int space2 = 2131034128;
+			
+			// aapt resource value: 0x7f050011
+			public const int textView1 = 2131034129;
 			
 			// aapt resource value: 0x7f050003
 			public const int topDecreaseButton = 2131034115;

@@ -123,7 +123,75 @@
                 android:layout_centerHorizontal="true"
                 android:scaleX="0.75"
                 android:scaleY="0.75"
-                android:elevation="0dp"/>
+                android:elevation="0dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout6">
+        <RelativeLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:background="#439889"
+            android:id="@+id/relativeLayout7"
+            android:layout_width="99.0dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true">
+            <Button
+                android:text="+"
+                android:textSize="30dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:id="@+id/bottomIncreaseButton"
+                android:background="@drawable/round_button"
+                android:stateListAnimator="@null"
+                android:elevation="10dp"
+                android:clickable="true"
+                android:layout_gravity="center_horizontal" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="119.5dp"
+            android:layout_height="172.5dp"
+            android:id="@+id/relativeLayout7"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal|center_vertical">
+            <TextView
+                android:text="20"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bottomLifeCounter"
+                android:textSize="90dp"
+                android:textColor="@android:color/background_light" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:background="#439889"
+            android:id="@+id/relativeLayout7"
+            android:layout_width="99.0dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true">
+            <Button
+                android:text="-"
+                android:textSize="30dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:id="@+id/bottomDecreaseButton"
+                android:background="@drawable/round_button"
+                android:stateListAnimator="@null"
+                android:elevation="10dp"
+                android:clickable="true"
+                android:layout_gravity="center_horizontal" />
         </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

@@ -30,10 +30,13 @@ namespace xamTest
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
-            Button decreaseButton = View.FindViewById<Button>(Resource.Id.topDecreaseButton);
-            Button increaseButton = View.FindViewById<Button>(Resource.Id.topIncreaseButton);
+            Button topDecreaseButton = View.FindViewById<Button>(Resource.Id.topDecreaseButton);
+            Button topIncreaseButton = View.FindViewById<Button>(Resource.Id.topIncreaseButton);
+            Button bottomDecreaseButton = View.FindViewById<Button>(Resource.Id.bottomDecreaseButton);
+            Button bottomIncreaseButton = View.FindViewById<Button>(Resource.Id.bottomIncreaseButton);
             Button resetTimerButton = View.FindViewById<Button>(Resource.Id.refreshTimerButton);
             TextView topLifeCounter = View.FindViewById<TextView>(Resource.Id.topLifeCounter);
+            TextView bottomLifeCounter = View.FindViewById<TextView>(Resource.Id.bottomLifeCounter);
 
             Context context = this.Activity;
             sharedPref = context.GetSharedPreferences(
@@ -41,18 +44,10 @@ namespace xamTest
                 );
             editor = sharedPref.Edit();
 
-            decreaseButton.Click += delegate
-            {
-                if (int.Parse(topLifeCounter.Text) > 0)
-                {
-                    topLifeCounter.Text = (int.Parse(topLifeCounter.Text) - 1).ToString();
-                }
-            };
-
-            increaseButton.Click += delegate
-            {
-                topLifeCounter.Text = (int.Parse(topLifeCounter.Text) + 1).ToString();
-            };
+            topDecreaseButton.Click += (senderAlert, args) => { decreaseLifeTotal(topLifeCounter); };
+            topIncreaseButton.Click += (senderAlert, args) => { increaseLifeTotal(topLifeCounter); };
+            bottomDecreaseButton.Click += (senderAlert, args) => { decreaseLifeTotal(bottomLifeCounter); };
+            bottomIncreaseButton.Click += (senderAlert, args) => { increaseLifeTotal(bottomLifeCounter); };
 
             resetTimerButton.Click += delegate
             {
@@ -63,6 +58,7 @@ namespace xamTest
 
         }
 
+        //Logic that executes when the fragment is visible
         public override bool UserVisibleHint
         {
             get => base.UserVisibleHint;
@@ -153,6 +149,19 @@ namespace xamTest
             gameTimer.Base = SystemClock.ElapsedRealtime();
             gameTimer.Start();
             Console.WriteLine("Starting from restart time");
+        }
+            
+        public void increaseLifeTotal(TextView counter)
+        {
+            counter.Text = (int.Parse(counter.Text) + 1).ToString();
+        }
+
+        public void decreaseLifeTotal(TextView counter)
+        {
+            if (int.Parse(counter.Text) > 0)
+            {
+                counter.Text = (int.Parse(counter.Text) - 1).ToString();
+            }
         }
 
 
