@@ -2,4 +2,8 @@
 <resources>
   <string name="app_name">xamTest</string>
   <string name="preference_file">mtgspy.PREFERENCE_FILE</string>
+  <string-array name="nav_items">
+    <item>Profile</item>
+    <item>Settings</item>
+  </string-array>
 </resources>
