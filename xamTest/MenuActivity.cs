@@ -14,7 +14,7 @@ using Android.Support.V4.App;
 
 namespace xamTest
 {
-    [Activity(Label = "MenuActivity", MainLauncher = true)]
+    [Activity(Label = "MTG Spy", Icon = "@drawable/launcher", MainLauncher = true)]
     public class MenuActivity : FragmentActivity
     { 
         protected override void OnCreate(Bundle savedInstanceState)

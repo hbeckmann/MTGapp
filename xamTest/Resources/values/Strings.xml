@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">xamTest</string>
+  <string name="app_name">MTG Spy</string>
   <string name="preference_file">mtgspy.PREFERENCE_FILE</string>
   <string-array name="nav_items">
     <item>Profile</item>
+    <item>My Records</item>
     <item>Settings</item>
   </string-array>
 </resources>

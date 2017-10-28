@@ -107,11 +107,12 @@
         <RelativeLayout
             android:minWidth="25px"
             android:minHeight="25px"
-            android:layout_width="110dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
             android:id="@+id/lifeCounterIcons"
             android:layout_alignParentEnd="true"
-            android:elevation="0dp">
+            android:elevation="0dp"
+            android:layout_marginLeft="0.0dp">
             <Button
                 android:background="@drawable/refresh_button"
                 android:drawableStart="@drawable/icrefreshblack24dp"
@@ -119,11 +120,26 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:id="@+id/refreshTimerButton"
-                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:scaleX="0.75"
                 android:scaleY="0.75"
-                android:elevation="0dp" />
+                android:elevation="0dp"
+                android:layout_centerVertical="true" />
+            <ImageButton
+                android:background="@drawable/refresh_button"
+                android:src="@drawable/icsaveblack24dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveGameButton"
+                android:rotation="90"
+                android:layout_centerHorizontal="true"
+                android:scaleX="0.75"
+                android:scaleY="0.75"
+                android:elevation="0dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:padding="5dp" />
         </RelativeLayout>
     </RelativeLayout>
     <RelativeLayout

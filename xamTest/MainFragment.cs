@@ -5,6 +5,9 @@ using Android.Views;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
+using Java.Lang.Reflect;
+using Android.Graphics;
+using System;
 
 namespace xamTest
 {
@@ -35,15 +38,23 @@ namespace xamTest
             drawerItems = Resources.GetStringArray(Resource.Array.nav_items);
             listView.Adapter = new ArrayAdapter(Application.Context, Resource.Layout.navMenu, drawerItems);
 
-
             Button button = View.FindViewById<Button>(Resource.Id.lifeCounterMenuButton);
+            ImageButton menuButton = View.FindViewById<ImageButton>(Resource.Id.menuIcon);
+
             button.Click += delegate
             {
                 viewPager.SetCurrentItem(1, true);
             };
+
+            menuButton.Click += delegate
+            {
+                drawerLayout.OpenDrawer(listView);
+            };
         }
 
 
+
     }
+
 }
 

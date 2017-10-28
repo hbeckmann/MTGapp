@@ -19,9 +19,6 @@ namespace xamTest
 
     public class MenuPagerAdapter : FragmentPagerAdapter
     {
-        MenuCatalog menuCatalog;
-        Context context;
-        LayoutInflater inflater;
         Android.Support.V4.App.Fragment[] page =
             {
             new MainFragment(),
@@ -31,9 +28,6 @@ namespace xamTest
 
         public MenuPagerAdapter(Android.Support.V4.App.FragmentManager fm) : base(fm)
         {
-            //this.menuCatalog = menuCatalog;
-            //this.context = context;
-            //this.inflater = LayoutInflater.From(context);
 
             pageCount = page.Count();
 
