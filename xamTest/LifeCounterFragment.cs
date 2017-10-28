@@ -35,6 +35,7 @@ namespace xamTest
             Button bottomDecreaseButton = View.FindViewById<Button>(Resource.Id.bottomDecreaseButton);
             Button bottomIncreaseButton = View.FindViewById<Button>(Resource.Id.bottomIncreaseButton);
             Button resetTimerButton = View.FindViewById<Button>(Resource.Id.refreshTimerButton);
+            ImageButton saveGameButton = View.FindViewById<ImageButton>(Resource.Id.saveGameButton);
             TextView topLifeCounter = View.FindViewById<TextView>(Resource.Id.topLifeCounter);
             TextView bottomLifeCounter = View.FindViewById<TextView>(Resource.Id.bottomLifeCounter);
 
@@ -48,6 +49,8 @@ namespace xamTest
             topIncreaseButton.Click += (senderAlert, args) => { increaseLifeTotal(topLifeCounter); };
             bottomDecreaseButton.Click += (senderAlert, args) => { decreaseLifeTotal(bottomLifeCounter); };
             bottomIncreaseButton.Click += (senderAlert, args) => { increaseLifeTotal(bottomLifeCounter); };
+            saveGameButton.Click += 
+                (senderAlert, args) => { gameDialog(this.Context, "Save game results?", "Save", null, "No Thanks", null  ); };
 
             resetTimerButton.Click += delegate
             {
@@ -73,7 +76,10 @@ namespace xamTest
 
                     if (appRestarted)
                     {
-                        ResumeGameDialog(this.Context, ResumeTime, RestartTime);
+                        string question = "Do you want to resume your last game?";
+                        string positivePrompt = "Resume";
+                        string negativePrompt = "No thanks";
+                        gameDialog(this.Context, question, positivePrompt, ResumeTime, negativePrompt, RestartTime);
                     }
                 }
                 appRestarted = false;
@@ -122,12 +128,12 @@ namespace xamTest
             Console.WriteLine("LifeCounter fragment has hit OnResume");
         }
 
-        public void ResumeGameDialog(Context context, AlertFunction positiveFunc, AlertFunction negativeFunc )
+        public void gameDialog(Context context, string questionPrompt, string positivePrompt, AlertFunction positiveFunc, string negativePrompt, AlertFunction negativeFunc )
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.SetTitle("Do you want to resume your last game?");
-            builder.SetPositiveButton("Resume", (senderAlert, args) => { positiveFunc(); });
-            builder.SetNegativeButton("No thanks", (senderAlert, args) => { negativeFunc(); });
+            builder.SetTitle(questionPrompt);
+            builder.SetPositiveButton(positivePrompt, (senderAlert, args) => { positiveFunc(); });
+            builder.SetNegativeButton(negativePrompt, (senderAlert, args) => { negativeFunc(); });
             Dialog dialog = builder.Create();
             dialog.Show();
         }
