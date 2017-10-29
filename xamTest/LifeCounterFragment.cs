@@ -6,6 +6,8 @@ using System.Threading;
 using System;
 using System.Diagnostics;
 using Android.Content;
+using SQLite;
+using System.Threading.Tasks;
 
 namespace xamTest
 {
@@ -45,12 +47,12 @@ namespace xamTest
                 );
             editor = sharedPref.Edit();
 
-            topDecreaseButton.Click += (senderAlert, args) => { decreaseLifeTotal(topLifeCounter); };
-            topIncreaseButton.Click += (senderAlert, args) => { increaseLifeTotal(topLifeCounter); };
-            bottomDecreaseButton.Click += (senderAlert, args) => { decreaseLifeTotal(bottomLifeCounter); };
-            bottomIncreaseButton.Click += (senderAlert, args) => { increaseLifeTotal(bottomLifeCounter); };
+            topDecreaseButton.Click += (senderAlert, args) => { DecreaseLifeTotal(topLifeCounter); };
+            topIncreaseButton.Click += (senderAlert, args) => { IncreaseLifeTotal(topLifeCounter); };
+            bottomDecreaseButton.Click += (senderAlert, args) => { DecreaseLifeTotal(bottomLifeCounter); };
+            bottomIncreaseButton.Click += (senderAlert, args) => { IncreaseLifeTotal(bottomLifeCounter); };
             saveGameButton.Click += 
-                (senderAlert, args) => { gameDialog(this.Context, "Save game results?", "Save", null, "No Thanks", null  ); };
+                (senderAlert, args) => { gameDialog(this.Context, "Save game results?", "Save", SaveGameStats, "No Thanks", null  ); };
 
             resetTimerButton.Click += delegate
             {
@@ -132,8 +134,8 @@ namespace xamTest
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.SetTitle(questionPrompt);
-            builder.SetPositiveButton(positivePrompt, (senderAlert, args) => { positiveFunc(); });
-            builder.SetNegativeButton(negativePrompt, (senderAlert, args) => { negativeFunc(); });
+            builder.SetPositiveButton(positivePrompt, (senderAlert, args) => { positiveFunc?.Invoke(); });
+            builder.SetNegativeButton(negativePrompt, (senderAlert, args) => { negativeFunc?.Invoke(); });
             Dialog dialog = builder.Create();
             dialog.Show();
         }
@@ -157,12 +159,12 @@ namespace xamTest
             Console.WriteLine("Starting from restart time");
         }
             
-        public void increaseLifeTotal(TextView counter)
+        public void IncreaseLifeTotal(TextView counter)
         {
             counter.Text = (int.Parse(counter.Text) + 1).ToString();
         }
 
-        public void decreaseLifeTotal(TextView counter)
+        public void DecreaseLifeTotal(TextView counter)
         {
             if (int.Parse(counter.Text) > 0)
             {
@@ -170,11 +172,78 @@ namespace xamTest
             }
         }
 
+        public void SaveGameStats()
+        {
+            Game gameStats = new Game
+            {
+                Date = "10/29/2017",
+                Result = "Win"
+            };
+            GameDatabase.InsertGameData(gameStats);
+            //GameDatabase.NumberOfGames().ContinueWith(t => { Console.WriteLine("PLEEEEEEEEEEEEEEEASE LORD " + t.Result.ToString()); });
+            Console.WriteLine("AYYYYYYYYYYYYYYYYYYYYYYYYYYYYY  " + GameDatabase.NumberOfGames());
+            
 
+        }
 
 
     }
 
+    public class GameDatabase
+    {
+
+        static SQLite.SQLiteConnection database;
+
+        public static SQLiteConnection Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new SQLite.SQLiteConnection(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData),"MTGSQL.db3"));
+                    database.CreateTable<Game>();
+                }
+
+                return database;
+            }
+        }
+
+        public static void InsertGameData(Game game)
+        {
+            Database.Insert(game);
+        }
+
+        public static string NumberOfGames()
+        {
+            //var count = Database.ExecuteScalarAsync<int>("SELECT Count(*) FROM Game");
+            var db = Database.Table<Game>();
+            //Console.WriteLine("LUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUL");
+            //return count;
+            return Database.Get<Game>(1).Result;
+
+        }
+
+        public GameDatabase()
+        {
+
+        }
+    }
+
+    public class Game
+    {
+        [PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
+
+        public string Date { get; set; }
+
+        public string Result { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("[Person: ID={0}, Date={1}, Result={2}]", ID, Date, Result);
+        }
+
+    }
 
 
 }
